@@ -32,6 +32,8 @@
                 </div>
                 <button type="button" class="btn btn-default" onclick="upload()">提交</button>
             </form>
+            <hr>
+            <ol id="fileInfo"></ol>
         </div>
     </div>
 </div>
@@ -49,6 +51,11 @@ function upload() {
         success: function (data) {
             if (data) {
                 document.getElementById("form").reset();
+                var file = data.file;
+                var uuid = data.uuid;
+                for (var i = 0; i < file.length; i++) {
+                    $("#fileInfo").append($("<li><a href='/file/download?uuid="+uuid+"&fileName="+file[i]+"'>"+file[i]+"</a></li>"));
+                }
                 alert("文件上传成功")
             } else {
                 alert("文件上传失败")
